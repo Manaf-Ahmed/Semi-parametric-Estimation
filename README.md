@@ -42,8 +42,9 @@ This script:
 ---
 
 ## 📈 Visualizations
-
+```r
 `source(box_bar_density_plots.R)` generates:
+```
 - **Bar plots**: RMSE for each parameter  
 - **Box plots**: Spread of estimated parameters  
 - **Density plots**: Error distribution for each method
