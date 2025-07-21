@@ -10,7 +10,7 @@ This repository accompanies the methodology proposed in the paper titled: A semi
 - `generate_TEG_process.R`: Contains the simulation function for generating data from the TEG process and Max-mixture process.
 - `estimation_code.R`: Estimation procedures including custom likelihood and F-madogram-based estimators.
 - `box_bar_density_plots.R`: Plotting utilities for RMSE boxplots, density plots, and bar plots.
-- `*.c`, `*.o`, `*.so`, `f2c.h`: Supporting C code for efficient computation.
+- `*.c`, `f2c.h`: Supporting C code for efficient computation.
 
 ---
 
