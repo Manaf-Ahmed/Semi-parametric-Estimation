@@ -84,7 +84,7 @@ Refer to [BOM data policy](http://www.bom.gov.au/other/copyright.shtml) for usag
 
 If you use this code, please cite the following work:
 
-> Ahmed, M. H., Maume-Deschamps, V., & Ribereau, P. (2025).  
+> Manaf Ahmed, Véronique Maume-Deschamps, & Pierre Ribereau, (2025).  
 > *Semi-parametric estimation of extremal dependence structures with application to spatial extremes.*
 
 ---
