@@ -31,11 +31,11 @@ system("R CMD SHLIB rdavghol.c")  # If needed
 dyn.load("cgj_new.so")
 dyn.load(paste("rdavghol.so")
 ```
-### 4. Run the main workflow
+### 4. Run commantes the main workflow secript 
 ```r
+source("Estimation_and_Simulation_Workflow.R")
 source("generate_TEG_process.R")
 source("estimation_code.R")
-source("Estimation_and_Simulation_Workflow.R")
 ```
 
 These scripts:
