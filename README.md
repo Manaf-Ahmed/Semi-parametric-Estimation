@@ -1,85 +1,98 @@
 # Semi-parametric Estimation and Simulation for Max-Mixture Models
 
-This repository accompanies the methodology proposed in the paper titled: A semi-parametric estimation procedure for max-mixture spatial processes. It contains all the necessary R scripts and C files required to simulate, estimate, and validate various max-mixture spatial models.
+This repository supports the methodology proposed in the paper titled:  
+**"A Semi-parametric Estimation Procedure for Max-Mixture Spatial Processes"**.  
+It includes all necessary R scripts and C source files to simulate, estimate, and validate spatial max-mixture models.
 
 ---
 
-## 📁 Structure
+## 📁 Repository Structure
 
-- `Estimation_and_Simulation_Workflow_commented.R`: Main workflow to simulate and estimate parameters
-- `generate_TEG_process.R`: Contains the simulation function for generating data from the TEG process and Max-mixture process.
-- `estimation_code.R`: Estimation procedures including custom likelihood and F-madogram-based estimators.
-- `box_bar_density_plots.R`: Plotting utilities for RMSE boxplots, density plots, and bar plots.
-- `*.c`, `f2c.h`: Supporting C code for efficient computation.
+- `Estimation_and_Simulation_Workflow.R` – Main script for simulating and estimating model parameters  
+- `generate_TEG_process.R` – Functions for simulating TEG and max-mixture processes  
+- `estimation_code.R` – Semi-parametric and censored likelihood-based estimation functions  
+- `box_bar_density_plots.R` – Functions to visualize RMSE, boxplots, and density plots  
+- `*.c`, `f2c.h`, `*.so` – C code for fast numerical computations  
 
 ---
 
 ## 🔧 How to Use
 
-### 1. **Load the project in RStudio**
-Set working directory.
+### 1. Set your working directory in R
+Make sure all scripts and compiled libraries are in the same folder.
 
-### 2. **Compile C source files**
-
-From the R console:
-
+### 2. Compile the C source files (from R console)
 ```r
-R CMD SHLIB src/cgj_new.c src/biv-nt.c
-dyn.load("libs/cgj_new.so")
+system("R CMD SHLIB cgj_new.c biv-nt.c")
+system("R CMD SHLIB rdavghol.c")  # If needed
+```
+### 3. Load the C functions  
+```r
+dyn.load("cgj_new.so")
+dyn.load(paste("rdavghol.so")
+```
+### 4. Run the main workflow
+```r
+source("generate_TEG_process.R")
+source("estimation_code.R")
+source("Estimation_and_Simulation_Workflow.R")
 ```
 
-### 3. **Run the full estimation & simulation workflow**
-
-```r
-source("R/Estimation_and_Simulation_Workflow.R")
-```
-
-This script:
-- Simulates spatial extreme data (e.g., TEG and max-mixture processes)
-- Estimates parameters using semi-parametric and liklihood methods
-- Computes RMSE and plots estimation performance
+These scripts:
+- Simulate spatial extremes (e.g., TEG, max-mixture)
+- Estimate parameters using F-madogram and likelihood
+- Compute RMSE and generate performance plots
 
 ---
 
-## 📈 Visualizations
+## 📈 Visualization
+
+Running 
 ```r
-`source(box_bar_density_plots.R)` generates:
+source("box_bar_density_plots.R")
 ```
-- **Bar plots**: RMSE for each parameter  
-- **Box plots**: Spread of estimated parameters  
-- **Density plots**: Error distribution for each method
+provides:
 
-Each plot distinguishes between least squares and likelihood-based estimators.
+- **Bar plots** – RMSE for each estimated parameter  
+- **Box plots** – Variability of the estimated parameters  
+- **Density plots** – Error distribution for each estimation method  
 
----
-
-## 📌 Methods
-
-The estimation is based on:
-- Least squares estimation via the proposed F-madogram 
-- Simulation of spatial processes with known extremal structure
-
-More details are in the paper (see citation below).
+Visual comparisons are shown between **Least Squares (LS)** and **Likelihood** estimators.
 
 ---
 
-## 📜 License and Data Use
+## 📌 Methodology Summary
 
-This code is released for academic, non-commercial use.
+This repository implements:
+- A novel **semi-parametric estimator based on the F-madogram** is proposed and compared with a parametric estimator using the **censored likelihood method** for estimating extremal dependence in spatial max-mixture processes
+- Simulated processes from max-stable and max-mixture models  
+- Estimation under different dependence structures: Smith, Schlather, Brown–Resnick  
+
+Detailed methodology can be found in the referenced paper below.
+
+---
+
+## 📜 License and Data Policy
+
+This code is provided for **academic and non-commercial use only**.  
+Due to licensing restrictions from the Australian Bureau of Meteorology (http://www.bom.gov.au), original rainfall datasets are **not included**.  
+Refer to [BOM data policy](http://www.bom.gov.au/other/copyright.shtml) for usage details.
+
+---
 
 ## 🧾 Citation
 
-Please cite the following work if you use this code:
+If you use this code, please cite the following work:
 
-Ahmed, M. H., Maume-Deschamps, V., & Ribereau, P. (2025).  
-*Semi-parametric estimation of extremal dependence structures with application to spatial extremes.*
+> Ahmed, M. H., Maume-Deschamps, V., & Ribereau, P. (2025).  
+> *Semi-parametric estimation of extremal dependence structures with application to spatial extremes.*
 
 ---
 
 ## 👨‍🔬 Authors
 
-- **Manaf H. Ahmed** – University of Mosul  
-- **Véronique Maume-Deschamps** – Université Claude Bernard Lyon 1  
-- **Pierre Ribereau** – Université Claude Bernard Lyon 1
+- **Manaf  Ahmed** – Department of Statistics and Informatics, University of Mosul  
+- **Véronique Maume-Deschamps** – ICJ, Université Claude Bernard Lyon 1  
+- **Pierre Ribereau** – ICJ, Université Claude Bernard Lyon 1
 
-📩 For questions: manaf.ahmed@uomosul.edu.iq
+📩 Contact: manaf.ahmed@uomosul.edu.iq
