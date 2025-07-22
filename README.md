@@ -26,57 +26,70 @@ Make sure all scripts and compiled libraries are in the same folder.
 system("R CMD SHLIB cgj_new.c biv-nt.c")
 system("R CMD SHLIB rdavghol.c")  # If needed
 ```
-### 3. Load the C functions  
+
+### 3. Load the compiled shared objects  
 ```r
 dyn.load("cgj_new.so")
-dyn.load(paste("rdavghol.so")
+dyn.load("rdavghol.so")  
 ```
-### 4. Run commantes the main workflow secript 
+
+### 4. Run the main workflow script  
 ```r
-source("Estimation_and_Simulation_Workflow.R")
 source("generate_TEG_process.R")
 source("estimation_code.R")
+source("Estimation_and_Simulation_Workflow.R")
 ```
 
 These scripts:
 - Simulate spatial extremes (e.g., TEG, max-mixture)
-- Estimate parameters using F-madogram and likelihood
-- Compute RMSE and generate performance plots
+- Estimate parameters using F-madogram and censored likelihood
+- All activities in the estimation, sImulation and plotting performance 
 
 ---
 
 ## 📈 Visualization
 
-Running 
+Running:
 ```r
 source("box_bar_density_plots.R")
 ```
-provides:
+Generates:
 
 - **Bar plots** – RMSE for each estimated parameter  
 - **Box plots** – Variability of the estimated parameters  
 - **Density plots** – Error distribution for each estimation method  
 
-Visual comparisons are shown between **Least Squares (LS)** and **Likelihood** estimators.
+Visual comparisons are provided between **Least Squares (LS)** and **Likelihood** estimators.
 
 ---
 
 ## 📌 Methodology Summary
 
 This repository implements:
-- A novel **semi-parametric estimator based on the F-madogram** is proposed and compared with a parametric estimator using the **censored likelihood method** for estimating extremal dependence in spatial max-mixture processes
-- Simulated processes from max-stable and max-mixture models  
-- Estimation under different dependence structures: Smith, Schlather, Brown–Resnick  
+- A novel **semi-parametric estimator based on the F-madogram**, compared with a parametric estimator using the **censored likelihood method** for estimating extremal dependence in spatial max-mixture processes.
+- Simulated processes from max-stable and max-mixture models.  
+- Estimation under different dependence structures: Smith (SM), Schlather (SC), and Brown–Resnick (BR).
 
-Detailed methodology can be found in the referenced paper below.
+Details are provided in the referenced paper below.
 
 ---
 
-## 📜 License and Data Policy
+## 🌐 Data Availability
 
 This code is provided for **academic and non-commercial use only**.  
-Due to licensing restrictions from the Australian Bureau of Meteorology (http://www.bom.gov.au), original rainfall datasets are **not included**.  
-Refer to [BOM data policy](http://www.bom.gov.au/other/copyright.shtml) for usage details.
+Due to licensing restrictions from the Australian Bureau of Meteorology ([BoM](http://www.bom.gov.au)), original rainfall datasets are **not included**.  
+Refer to [BoM data policy](http://www.bom.gov.au/other/copyright.shtml) for full usage terms.
+
+**Station numbers used in the analysis:**
+
+```
+040020, 040051, 040094, 040138, 041025, 041128, 041310, 
+053033, 055002, 055017, 055049, 060013, 061130, 062021, 
+064009, 065000, 072056, 073007, 073110, 084015, 084025, 
+084096, 084122, 035205, 044001, 040013, 043052, 052067, 
+048027, 048025, 048176, 051049, 036040, 052003, 050108, 
+060085, 058019, 066013, 062003
+```
 
 ---
 
@@ -84,14 +97,13 @@ Refer to [BOM data policy](http://www.bom.gov.au/other/copyright.shtml) for usag
 
 If you use this code, please cite the following work:
 
-> Manaf Ahmed, Véronique Maume-Deschamps, & Pierre Ribereau, (2025).  
-> *Semi-parametric estimation of extremal dependence structures with application to spatial extremes.*
+*Semi-parametric estimation of extremal dependence structures with application to spatial extremes.*
 
 ---
 
 ## 👨‍🔬 Authors
 
-- **Manaf  Ahmed** – Department of Statistics and Informatics, University of Mosul  
+- **Manaf Ahmed** – Department of Statistics and Informatics, University of Mosul  
 - **Véronique Maume-Deschamps** – ICJ, Université Claude Bernard Lyon 1  
 - **Pierre Ribereau** – ICJ, Université Claude Bernard Lyon 1
 
